@@ -1,8 +1,11 @@
 from flask import Flask, render_template, request, jsonify
 from flask_socketio import SocketIO, emit
+from flask_cors import CORS
+
 
 app = Flask(__name__)
 socketio = SocketIO(app)
+CORS(app)  # This allows all origins
 
 messages = []
 
