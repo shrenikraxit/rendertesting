@@ -1,6 +1,11 @@
 from flask import Flask, render_template, request, jsonify
 from flask_socketio import SocketIO, emit
 from flask_cors import CORS
+from flask import Flask
+from flask_cors import CORS
+
+app = Flask(__name__)
+app.config['CORS_ORIGINS'] = ['https://a383cf8f-e551-4a91-a560-df487bd0a5cf-00-8z64ftwuvwm4.picard.replit.dev']  # Replace with your allowed origin
 
 
 app = Flask(__name__)
