@@ -1,15 +1,24 @@
-from flask import Flask, request, render_template
+from flask import Flask, render_template, request, jsonify
+from flask_socketio import SocketIO, emit
 
-app = Flask(__name__,)
+app = Flask(__name__)
+socketio = SocketIO(app)
 
 messages = []
 
-@app.route('/', methods=['GET', 'POST'])
+@app.route('/')
 def index():
-    if request.method == 'POST':
-        message = request.form['message']
-        messages.append(message)
-    return render_template('index.html', messages=messages)
+    return render_template('index.html')
+
+@socketio.on('message')
+def   
+ handle_message(data):
+    messages.append(data)
+    emit('response', {'data': 'Message received from client'}, broadcast=True)
+
+@socketio.on('connect')
+def handle_connect():
+    print('Client connected')
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    socketio.run(app)
