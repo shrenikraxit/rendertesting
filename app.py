@@ -1,35 +1,15 @@
-from flask import Flask, render_template, request, jsonify
-from flask_socketio import SocketIO, emit
-from flask_cors import CORS
-from flask import Flask
-from flask_cors import CORS
+from flask import Flask, request, render_template
 
 app = Flask(__name__)
-app.config['CORS_ORIGINS'] = ['https://a383cf8f-e551-4a91-a560-df487bd0a5cf-00-8z64ftwuvwm4.picard.replit.dev']  # Replace with your allowed origin
-
-
-app = Flask(__name__)
-socketio = SocketIO(app)
-CORS(app)  # This allows all origins
 
 messages = []
 
-
-@app.route('/')
+@app.route('/', methods=['GET', 'POST'])
 def index():
-    return render_template('index.html')
-
-
-@socketio.on('message')
-def handle_message(data):
-    messages.append(data)
-    emit('response', {'data': 'Message received from client'}, broadcast=True)
-
-
-@socketio.on('connect')
-def handle_connect():
-    print('Client connected')
-
+    if request.method == 'POST':
+        message = request.form['message']
+        messages.append(message)
+    return render_template('index.html', messages=messages)
 
 if __name__ == '__main__':
-    socketio.run(app)
+    app.run(debug=True)
