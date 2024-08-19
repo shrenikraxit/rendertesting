@@ -1,31 +1,21 @@
-from flask import Flask, request, jsonify, render_template
+from flask import Flask, request, jsonify
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app)
 
-# In-memory storage for simplicity
-stored_images = []
-
-@app.route('/process-json', methods=['POST'])
-def process_json():
+@app.route('/export-images', methods=['POST'])
+def export_images():
     data = request.get_json()
+    images = data.get('images', [])
 
-    if not data or 'images' not in data:
-        return jsonify({'error': 'No image data received'}), 400
+    if images:
+        # Here, you can save the images or process them as needed
+        # For example, save them to the filesystem or a database
 
-    # Store the images
-    global stored_images
-    stored_images.extend(data['images'])
-
-    return jsonify({'message': 'Images received successfully'}), 200
-
-@app.route('/get-images', methods=['GET'])
-def get_images():
-    global stored_images
-    return jsonify({'images': stored_images})
-
-@app.route('/')
-def index():
-    return render_template('index.html')
+        return jsonify({"message": "Images received and processed successfully!"}), 200
+    else:
+        return jsonify({"message": "No images received!"}), 400
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000, debug=True)
+    app.run(host='0.0.0.0', port=5000)
