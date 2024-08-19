@@ -1,8 +1,10 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, render_template
 from flask_cors import CORS
 
 app = Flask(__name__)
 CORS(app)
+
+return render_template('index.html', data=data)
 
 @app.route('/export-images', methods=['POST'])
 def export_images():
