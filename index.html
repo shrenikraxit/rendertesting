@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Language Translator</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <script src="script.js"></script>
+    <header>
+        <h1>Sign Language Translator</h1>
+    </header>
+    <main>
+            <div class="camera-container">
+                <div class="camera-frame">
+                    <video id="video" autoplay></video>
+                    <canvas id="canvas"></canvas>
+                    <div id="timer" class="timer"></div>
+                </div>
+                <div class="controls">
+                    <button id="capture">Capture</button>
+                    <button id="retake" style="display: none;">Retake</button>
+                    <button id="confirm" style="display: none;">Confirm</button>
+                </div>
+                <div id="preview" class="preview">
+                    <button id="export-button" style="display: none;">Export</button> <!-- Moved here -->
+                </div>
+            </div>
+        </main>
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span id="close-modal" class="close">&times;</span>
+            <img id="modal-image" src="" alt="Preview">
+        </div>
+    </div>
+</body>
+</html>
