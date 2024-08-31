@@ -34,7 +34,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     canvas.height = video.videoHeight;
                 };
             })
-            .catch(err => console.error('Error accessing camera: ', err));
     }
 
     function stopCamera() {
@@ -141,8 +140,6 @@ document.addEventListener('DOMContentLoaded', () => {
       })
           //works up to this
       .then(response => response.json())
-      .then(data => console.log(data))
-      .catch(error => console.error(error));
     });
 
     translateButton.addEventListener('click', () => {
