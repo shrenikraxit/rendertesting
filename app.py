@@ -13,5 +13,6 @@ def upload_file():
 
   return 'File uploaded successfully'
 
-if __name__ == '__main__':
-  app.run(debug=True)
+
+if __name__ == "__main__":
+    app.run(host=os.getenv('HOST'), port=int(os.getenv('PORT'),10000), debug=False)
